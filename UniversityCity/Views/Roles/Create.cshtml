@@ -1,0 +1,67 @@
+﻿@model Microsoft.AspNet.Identity.EntityFramework.IdentityRole
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    <div class="container">
+
+        <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#createRole">انشاء الان</button>
+
+        <div class="modals">
+            <div class="modal fade askPopup" id="createRole" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalTitle">انشاء صلاحية</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group" id="myform">
+                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "نوع المستخدم" } })
+                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                            </div>
+                            <div>
+                                @Html.ActionLink("العودة", "Index", new { @class = "btn btn-danger" })
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">لا</button>
+                            <input type="submit" value="حفظ" class="btn btn-danger" id="btnSave" />
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+        <script>
+            $(document).ready(function () {
+
+                $("#btnSave").click(function () {
+                    var myformData = $("#myform").serialize();
+                    $.ajax({
+
+                        type: "post",
+                        url: "/Roles/Create",
+                        data: myformData,
+                        success: function () {
+                            $("#createRole").modal("hide");
+                        }
+                    })
+                })
+            })
+
+        </script>
+

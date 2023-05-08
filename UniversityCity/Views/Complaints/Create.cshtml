@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <section class="sendComplain">
+        <div class="container">
+            <h3>تقديم شكوي</h3>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @if (ViewBag.Result != null)
+            {
+                <div class="shadow-lg p-3 mb-5 bg-white rounded">
+                    <h5 style="text-align:center; color:#1c5e84;">@ViewBag.Result</h5>
+                </div>
+                @*<h3 class="H">@ViewBag.Result</h3>*@
+            }
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="txt">
+                        هناك حقيقة مثبتة منذ زمن طويل وهي أن المحتوى المقروء لصفحة ما سيلهي القارئ عن التركيز على الشكل الخارجي للنص أو شكل توضع الفقرات في الصفحة التي يقرأها. ولذلك يتم استخدام طريقة لوريم إيبسوم لأنها تعطي توزيعاَ طبيعياَ -إلى حد ما- للأحرف عوضاً عن استخدام "هنا يوجد محتوى نصي، هنا يوجد محتوى نصي" فتجعلها تبدو (أي الأحرف) وكأنها نص مقروء.
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form">
+                        <div class="form-group">
+
+                          @*  @Html.TextArea("Message", new { htmlAttributes = new { @class = "form-control area" } })*@
+                            <textarea class="custom" name="Message" placeholder="نص الشكوي"></textarea>
+                            @Html.ValidationMessage("Message", "", new { @class = "text-danger" })
+                        </div>
+                        <div class="actions">
+                            <input type="submit" value="ارسال" class="btn btn-primary" />  
+                       </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}

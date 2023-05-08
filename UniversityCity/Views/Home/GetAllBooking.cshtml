@@ -1,0 +1,180 @@
+﻿@model IEnumerable<UnivercityCityFood.Models.BookingFood>
+
+@*using PagedList.Mvc;
+    using PagedList;*@
+
+@{
+    ViewBag.Title = "GetAllBooking";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+<div class="container">
+    @if (ViewBag.Message != null)
+    {
+        <div class="alert alert-success">
+            <p>
+                @ViewBag.Message
+            </p>
+        </div>
+    }
+
+    @using (Html.BeginForm("GetAllBooking", "Home", FormMethod.Get))
+    {
+        <div class="col-12">
+            <div class="row">
+                <div class="col-md-6 col-xl-4">
+                    <div class="form-group">
+                        <h5>الرقم القومي</h5>
+                        <div class="field">
+                            <input type="text" name="search" class="custom" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-4">
+                    <div class="form-group">
+                        <h5>من</h5>
+                        <div class="field">
+                            <input type="date" name="start" class="form-control" />
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-4">
+                    <div class="form-group">
+                        <h5>الى</h5>
+                        <div class="field">
+                            <input type="date" name="end" class="custom" />
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="actions">
+                        <input type="submit" name="submit" value="بحث" class="btn btn-danger action" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+
+
+    <div class="col-12">
+        <div class="tableList">
+            <table class="table table-striped table-borderd text-center">
+                <thead>
+                    <tr>
+
+                        <th>
+                            اسم الطالب
+                        </th>
+                        <th>
+                            الرقم القومى
+                        </th>
+                        <th>
+                            اليوم
+                        </th>
+                        <th>
+                            الاستلام
+                        </th>
+                        <th>
+                            الغرامة
+                        </th>
+                        <th>
+                            الحجز
+                        </th>
+
+                        <th>
+                            تاريخ
+                        </th>
+                        <th>
+                            الوقت
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.appUser.UserName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.appUser.UserID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.day.DayName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Received)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Fine)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Booked)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.BookingDateToDay)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.BookingTimeToDay)
+                            </td>
+                            <td>
+                                @{
+                                    DateTime thisDay = DateTime.Today;
+                                    var thisDayAfter = thisDay.ToString("d");
+
+                                    TimeRange timeRange = new TimeRange();
+                                    timeRange = TimeRange.Parse("19:00-23:00");
+                                    bool IsNowInTheRange = timeRange.IsIn(DateTime.Now.TimeOfDay);
+                                    if (item.Received == false && IsNowInTheRange && item.BookingDateToDay == thisDayAfter)
+                                    {
+                                        @Html.ActionLink("تعديل", "Edit", new { id = item.id }, new { @class = "btn btn-danger" })
+                                    }
+
+                                }
+                                @if (!(IsNowInTheRange && item.BookingDateToDay == thisDayAfter) && item.Fine == false)
+                                {
+                                    @Html.ActionLink("غرامة", "SaveInFine", new { id = item.id }, new { @class = "btn btn-primary" })
+                                }
+                            </td>
+                        </tr>
+                                    }
+
+                </tbody>
+            </table>
+            @if (ViewBag.countOfAllStudentBooking != null)
+            {
+                <div class="stCount">
+                    عدد جميع الحجزات:
+                    <span>@ViewBag.countOfAllStudentBooking  </span>
+                </div>
+
+            }
+            @if (ViewBag.countOfthisDayStudentBooking != null)
+            {
+
+                <div class="stCount">
+                    عدد حجزات اليوم:
+
+                    <span>@ViewBag.countOfthisDayStudentBooking  </span>
+
+                </div>
+            }
+            @if (ViewBag.countOfAllStudentReceivedBooking != null)
+            {
+
+
+                <div class="stCount">
+                    عدد الوجبات المستلمة:
+
+                    <span>@ViewBag.countOfAllStudentReceivedBooking  </span>
+
+                </div>
+            }
+        </div>
+    </div>
+
+</div>
+

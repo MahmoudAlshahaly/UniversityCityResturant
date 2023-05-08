@@ -1,0 +1,38 @@
+﻿@model UnivercityCityFood.Models.Complaint
+
+@{
+    ViewBag.Title = "DetailsOfComplaint";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<section class="signUp">
+    <div class="form">
+        <div class="container">
+            <div class="row">
+               
+                <div class="col-md-6 col-xl-4">
+                    <div class="data-view">
+                        <h5>محتوى الشكوي</h5>
+                        <div class="field">
+                            @Html.DisplayFor(model => model.CompContent)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-4">
+                    <div class="data-view">
+                        <h5>تاريخ الشكوي</h5>
+                        <div class="field">
+                            @Html.DisplayFor(model => model.CompDate)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="actions">
+              
+                @Html.ActionLink("العوده", "GetComplaintByUsers","", new { @class = "btn btn-danger" })
+            </div>
+        </div>
+    </div>
+</section>
+
+

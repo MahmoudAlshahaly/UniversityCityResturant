@@ -1,0 +1,268 @@
+﻿@using Microsoft.AspNet.Identity
+@using UniversityCity.Models
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel="shourtcut icon" href="../Content/imgs/logo.png" type="image/x-icon" />
+    <!--IE Comatibility Meta-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--First Mobile Meta-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>الرئيسية</title>
+
+    <link rel="stylesheet" href="~/Content/assests/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/assests/slick/slick.css" />
+
+    <link rel="stylesheet" href="~/Content/assests/slick/slick-theme.css" />
+
+    <link rel="stylesheet" href="~/Content/assests/fontawesome/css/fontawesome-all.min.css" />
+    <link rel="stylesheet" href="~/Content/assests/dateTimePicker/css/dateTimePicker.min.css" />
+    <link rel="stylesheet" href="~/Content/css/style.css" />
+    <link rel="stylesheet" href="~/Content/css/media.css" />
+
+
+</head>
+<body>
+
+  
+
+    <div class="wrapper">
+        @if (User.Identity.IsAuthenticated)
+        {
+
+            ApplicationDbContext db = new ApplicationDbContext();
+            var userid = User.Identity.GetUserId();
+            var userData = db.Users.Where(a => a.Id == userid).SingleOrDefault();
+            Session["UserType"] = userData.UserType;
+
+            if ((string)Session["UserType"] == "طالب")
+            {
+                <div class="navBar">
+                    <div class="container">
+                        <nav class="navbar navbar-expand-lg">
+                            <a class="navbar-brand" href="#"><img src="~/Content/imgs/logo.png"/></a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </button>
+
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav">
+                                    <li class="nav-item active">
+                                        <a class="nav-link" href="~/Home/Index">الرئيسية<span class="sr-only">(current)</span></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="~/Account/DisplayProfile">الصفحة الشخصية</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="~/Home/Quetion">اسئلة شائعة</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="~/Complaints/Create">الشكاوى</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="~/Home/About">عن الموقع</a>
+                                    </li>
+
+                                    @Html.Partial("_Login")
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+
+
+                <section class="mealReserve" style="background-image: url('../../Content/imgs/intro/meal.jpg')">
+
+                    <div class="details">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mealDet">
+                                    <h3 style="color:#b79000;">اللوائح الخاصة بمطعم بالمدينة الجامعية</h3>
+                                    <div class="mealBlock">
+                                        <h5>الهدف</h5>
+                                        <p>
+                                           تمتع عزيزى الطالب انت وزملائك بأشهي المأكولات التى تحبها فى مطعم المدينة الجامعية
+                                        </p>
+                                    </div>
+                                    <div class="mealBlock">
+                                        <h5>الغرامات</h5>
+                                        <p>
+                                           عزيزى الطالب عليك التوجة لكى تدفع الغرامة فى خلال 24 ساعة والا ستمنع من حجز وجبتك
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="period">
+                                    <p>
+                                        <h5 style="color:#b79000;">
+                                            الحجز متاح من
+                                            <span>07:00 PM</span>
+                                            حتي
+                                            <span>11:00 PM</span>
+                                        </h5>
+                                    </p>
+                                </div>
+                                @if (DateTime.Now.Hour>=19 && DateTime.Now.Hour<=23)
+                                {
+                                <div class="remaining">
+                                    <p>متبقي من الوقت على أنتهاء وقت الحجز</p>
+
+                                    <div class='timer' id="stTimer" data-minutes-left=0></div>
+                                </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            }
+            else
+            {
+                <div class="navBar">
+                    <div class="container">
+                        <nav class="navbar navbar-expand-lg">
+                            <a class="navbar-brand" href="#"><img src="~/Content/imgs/logo.png" /></a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </button>
+
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav">
+                                    <li class="nav-item active">
+                                        <a class="nav-link" href="~/Home/Index">الرئيسية<span class="sr-only">(current)</span></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="~/Account/DisplayProfile">الصفحة الشخصية</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="~/Home/Quetion">اسئلة شائعة</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="~/Complaints/Create">الشكاوى</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="~/Home/About">عن الموقع</a>
+                                    </li>
+                                    <li class="nav-item dropdown active">
+
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            التقارير
+                                        </a>
+                                        @if ((string)Session["UserType"] == "Admins")
+                                        {
+                                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <a class="dropdown-item" href="~/Faculties/Index">الكليات</a>
+                                                <a class="dropdown-item" href="~/Days/Index">الايام </a>
+                                                <a class="dropdown-item" href="~/GenerateBarCode/BarcodeWriter">الباركود</a>
+                                                <a class="dropdown-item " href="~/Roles/Index">الصلاحيات</a>
+                                                @*<a class="dropdown-item " href="~/ApplicationUsers/Index">بيانات الطالبة</a>*@
+                                                <a class="dropdown-item active" href="~/UserSDNs/Index">الارقام القومية</a>
+                                            </div>
+                                        }
+                                        else if ((string)Session["UserType"] == "مشرف بونات")
+                                        {
+                                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <a class="dropdown-item" href="~/PayFines/Index?name=AllFine">جميع الغرامات </a>
+                                                <a class="dropdown-item" href="~/PayFines/Index?name=FineNotPay">جميع الغرامات الغير مدفوعة </a>
+                                                <a class="dropdown-item active" href="~/PayFines/Index?name=FinePay">جميع الغرامات المدفوع </a>
+                                            </div>
+                                        }
+                                        else if ((string)Session["UserType"] == "مشرف مطعم")
+                                        {
+                                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <a class="dropdown-item" href="~/Home/GetAllBooking?name=AllBooking">جميع الحجزات </a>
+                                                <a class="dropdown-item" href="~/Home/GetAllBooking?name=BookingReceived">جميع الحجزات المستلمة </a>
+                                                <a class="dropdown-item active" href="~/Home/GetAllBooking?name=BookingToday">جميع حجزات اليوم </a>
+                                            </div>
+                                        }
+                                        else if ((string)Session["UserType"] == "مدير مطعم")
+                                        {
+                                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <a class="dropdown-item" href="~/Home/GetAllBooking?name=AllBooking">جميع الحجزات </a>
+                                                <a class="dropdown-item" href="~/Home/GetAllBooking?name=BookingReceived">جميع الحجزات المستلمة </a>
+                                                <a class="dropdown-item" href="~/Home/GetAllBooking?name=BookingToday">جميع حجزات اليوم </a>
+
+                                                <a class="dropdown-item" href="~/PayFines/Index?name=AllFine">جميع الغرامات </a>
+                                                <a class="dropdown-item" href="~/PayFines/Index?name=FineNotPay">جميع الغرامات الغير مدفوعة </a>
+                                                <a class="dropdown-item" href="~/PayFines/Index?name=FinePay">جميع الغرامات المدفوع </a>
+
+                                                <a class="dropdown-item active" href="~/Complaints/GetAllComplaints">جميع الشكاوى </a>
+                                            </div>
+
+                                        }
+
+                                    </li>
+
+                                    @Html.Partial("_Login")
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+
+                <section class="mealReserve" style="background-image: url('../../Content/imgs/intro/bg.jpg')">
+
+                    <div class="details">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mealDet">
+                                    <h3>تفاصيل الوجبات</h3>
+                                    <div class="mealBlock">
+                                        <h5>وجبة الغداء</h5>
+                                        <p>
+                                            أرز, مكرونة, لحم, سمك, لبن, تمر هندي.
+                                        </p>
+                                    </div>
+                                    <div class="mealBlock">
+                                        <h5>وجبة العشاء</h5>
+                                        <p>
+                                            أرز, مكرونة, لحم, سمك, لبن, تمر هندي.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+            }
+
+        }
+        @*style="min-height:275px;"*@
+        <div style="min-height:235px;" >
+
+            @RenderBody()
+        </div>
+
+
+
+        @if (User.Identity.IsAuthenticated)
+        {
+            <footer>
+                <div class="container">
+                    <div class="copyrights" >
+                        <p style="color:white;">كل الحقوق محفوظه © MenoFia Innovators TeaM 2019</p>
+                    </div>
+                </div>
+            </footer>
+        }
+    </div>
+
+    <script src="~/Content/assests/jquery/jquery.min.js"></script>
+    <script src="~/Content/assests/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/Content/assests/slick/slick.min.js"></script>
+    <script src="~/Content/assests/countDown/js/countDown.js"></script>
+    <script src="~/Content/assests/dateTimePicker/js/moment.min.js"></script>
+    <script src="~/Content/assests/dateTimePicker/js/dateTimePicker.min.js"></script>
+    <script src="~/scripts/main.js"></script>
+
+</body>
+</html>

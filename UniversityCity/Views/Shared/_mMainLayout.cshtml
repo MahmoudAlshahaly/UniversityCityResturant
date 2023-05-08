@@ -1,0 +1,229 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width,initial scale=1" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/Style.css" rel="stylesheet" />
+
+
+
+</head>
+<body>
+    <div>
+        <!--Navbar-->
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @*<a href="#" class="navbar-brand">
+                            <img src="#" class="Logo-size" />
+                        </a>*@
+                </div>
+
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="~/Home/Index">
+                                <i class="glyphicon glyphicon-home"></i>
+                                الصفحة الرئيسية
+                            </a>
+                        </li>
+
+
+
+                        <li class="dropdown" data-admin-Resturant-menu>
+                            <a href="#">
+                                مدير المطعم
+                                <span class="glyphicon glyphicon-chevron-down"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                @*Place our menu items*@
+                                <li class="dropdown-header">مدير المطعم</li>
+                                <li class="divider" />
+                                <li><a href="~/Home/GetAllBooking?name=AllBooking">&nbsp;&nbsp;جميع الحجزات</a></li>
+                                <li><a href="~/Home/GetAllBooking?name=BookingReceived">&nbsp;&nbsp;جميع الحجزات المستلمة</a></li>
+                                <li><a href="~/Home/GetAllBooking?name=BookingToday">&nbsp;&nbsp;جميع حجزات اليوم</a></li>
+
+                                <li><a href="~/Complaints/GetAllComplaints">&nbsp;&nbsp; جميع الشكاوى</a></li>
+
+                                <li><a href="~/PayFines/Index?name=AllFine">&nbsp;&nbsp; جميع الغرامات</a></li>
+                                <li><a href="~/PayFines/Index?name=FineNotPay">&nbsp;&nbsp; جميع الغرامات الغير مدفوعة</a></li>
+                                <li><a href="~/PayFines/Index?name=FinePay">&nbsp;&nbsp; جميع الغرامات المدفوعة</a></li>
+                                <li><a href="~/Account/EditProfile">&nbsp;&nbsp;تعديل الحساب الخاص بك</a></li>
+
+                            </ul>
+                        </li>
+                        <li class="dropdown" data-admin-menu>
+                            <a href="#">
+                                المدير العام
+                                <span class="glyphicon glyphicon-chevron-down"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                @*Place our menu items*@
+
+                                <li class="dropdown-header">المدير العام</li>
+                                <li class="divider" />
+                                <li><a href="~/Faculties/Index">&nbsp;&nbsp;الكليات</a></li>
+                                <li><a href="~/Days/Index">&nbsp;&nbsp;الايام</a></li>
+                                <li><a href="~/GenerateBarCode/BarcodeWriter">&nbsp;&nbsp;الباركود</a></li>
+                                <li><a href="~/Roles/Index">&nbsp;&nbsp;الصلاحيات</a></li>
+                                <li><a href="~/UserSDNs/Index">&nbsp;&nbsp;الارقام القومية</a></li>
+                                <li><a href="~/ApplicationUsers/Index">&nbsp;&nbsp;بيانات الطالبة</a></li>
+                                <li><a href="~/Account/EditProfile">&nbsp;&nbsp;تعديل الحساب الخاص بك</a></li>
+
+
+                            </ul>
+                        </li>
+
+                        <li class="dropdown" data-Supervisor-Resturant-menu>
+                            <a href="#">
+                                مشرف المطعم
+                                <span class="glyphicon glyphicon-chevron-down"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                @*Place our menu items*@
+
+                                <li class="dropdown-header">مشرف المطعم</li>
+                                <li class="divider" />
+                                <li><a href="~/Home/GetAllBooking?name=AllBooking">&nbsp;&nbsp;جميع الحجزات</a></li>
+                                <li><a href="~/Home/GetAllBooking?name=BookingReceived">&nbsp;&nbsp;جميع الحجزات المستلمة</a></li>
+                                <li><a href="~/Home/GetAllBooking?name=BookingToday">&nbsp;&nbsp;جميع حجزات اليوم</a></li>
+
+                                <li><a href="~/Account/EditProfile">&nbsp;&nbsp;تعديل الحساب الخاص بك</a></li>
+
+
+                            </ul>
+                        </li>
+
+                        <li class="dropdown" data-Supervisor-Bonat-menu>
+                            <a href="#">
+                                مشرف البونات
+                                <span class="glyphicon glyphicon-chevron-down"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                @*Place our menu items*@
+
+                                <li class="dropdown-header">مشرف البونات</li>
+                                <li class="divider" />
+                                <li><a href="~/PayFines/Index?name=AllFine">&nbsp;&nbsp; جميع الغرامات</a></li>
+                                <li><a href="~/PayFines/Index?name=FineNotPay">&nbsp;&nbsp; جميع الغرامات الغير مدفوعة</a></li>
+                                <li><a href="~/PayFines/Index?name=FinePay">&nbsp;&nbsp; جميع الغرامات المدفوعة</a></li>
+                                <li><a href="~/Account/EditProfile">&nbsp;&nbsp;تعديل الحساب الخاص بك</a></li>
+
+
+                            </ul>
+                        </li>
+
+                        <li class="dropdown" data-Student-menu>
+                            <a href="#">
+                                الطالب
+                                <span class="glyphicon glyphicon-chevron-down"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                @*Place our menu items*@
+
+                                <li class="dropdown-header">الطالب</li>
+                                <li class="divider" />
+                                @*<li><a href="~/Home/Booking">&nbsp;&nbsp;حجز وجبة</a></li>*@
+                                <li><a href="~/Complaints/GetComplaintByUsers">&nbsp;&nbsp;الشكاوى الخاصة بك</a></li>
+                                <li><a href="~/Complaints/Create">&nbsp;&nbsp;تقديم شكوى</a></li>
+                                <li><a href="~/Home/GetBookingByUsers">&nbsp;&nbsp;الحجزات الخاصة بك</a></li>
+                                <li><a href="~/Home/GetAllFineByUsers">&nbsp;&nbsp;الغرامات الخاصة بك</a></li>
+                                <li><a href="~/Account/EditProfile">&nbsp;&nbsp;تعديل الحساب الخاص بك</a></li>
+
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <!--Partial Login-->
+                    @Html.Partial("_Login")
+                </div>
+
+
+            </div>
+        </nav>
+
+        <div class="container">
+            <div class="row" style="min-height:400px;">
+                @RenderBody()
+            </div>
+        </div>
+
+
+        <!--Footer-->
+        <footer class="myfooter">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h4>
+                            <i class="glyphicon glyphicon-question-sign"></i>
+                            من نحن
+                        </h4>
+                        <p>
+                            السلام عليكم ورحمة الله وبركاتة نحن جروب من المبرمجين ومصممين صفحات المواقع وبرامج الديسك توب كلية العلوم قسم الرياضيات البحتة وعلوم الحاسب جامعة المنوفية
+                        </p>
+                    </div>
+
+                    <div class="col-md-4">
+                        <h4>
+                            <i class="glyphicon glyphicon-globe"></i>
+                            روابط هامة
+                        </h4>
+                        <ul>
+                            <li>
+                                <i class="glyphicon glyphicon-info-sign"></i>
+                                <a href="#">حول الموقع</a>
+
+                            </li>
+                            <li>
+                                <a href="#">سياسة الموقع</a>
+                            </li>
+                            <li>
+                                <a href="#">العقوبات</a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="glyphicon glyphicon-envelope"></i>
+                                    اتصل بنا
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="col-md-4">
+                        <h4>
+                            <i class="glyphicon glyphicon-envelope"></i>
+                            تواصل معنا المبرمجين
+                        </h4>
+                        <ul>
+                            <li>
+                                <a href="#">محمود</a>
+                            </li>
+                            <li>
+                                <a href="#">عبدالله</a>
+                            </li>
+                            <li>
+                                <a href="#">عبدالرحمن</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+            <div class="subfooter">
+                <span>جميع الحقوق محفوظه للمبرمجين - 2019</span>
+            </div>
+        </footer>
+        <script src="~/scripts/jquery.js"></script>
+        <script src="~/scripts/bootstrap.min.js"></script>
+        <script src="~/scripts/AdminMenu.js"></script>
+        @RenderSection("Scripts", required: false)
+
+    </div>
+</body>
+</html>

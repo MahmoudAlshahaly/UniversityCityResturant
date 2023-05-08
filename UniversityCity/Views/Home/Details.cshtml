@@ -1,0 +1,52 @@
+﻿@model UnivercityCityFood.Models.Day
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+
+@{ 
+    string photoNumber = @Html.DisplayFor(model => model.DayID)+ ".jpg";
+
+}
+<section class="signUp">
+    <div class="form">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="userPic">
+                        <div class="upImg" style="background-image: url('../../Content/imgs/intro/@photoNumber')">
+                        </div>
+                        <div class="det">
+                            <h3>صورة الوجبة</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-4">
+                    <div class="data-view">
+                        <h5>يوم الحجز</h5>
+                        <div class="field">
+                            @Html.DisplayFor(model => model.DayName)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-4">
+                    <div class="data-view">
+                        <h5>وصف مكونات الوجبة</h5>
+                        <div class="field">
+                            @Html.DisplayFor(model => model.DayDescription)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="actions">
+                @Html.ActionLink("تابع لحجز الوجبة", "Booking", new { id = Model.DayID }, new { @class = "btn btn-dark" }) 
+                @Html.ActionLink("العودة", "Index","", new { @class = "btn btn-danger" })
+            </div>
+        </div>
+    </div>
+</section>
+
+
+

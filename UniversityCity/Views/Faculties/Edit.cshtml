@@ -1,0 +1,38 @@
+﻿@model UnivercityCityFood.Models.Faculty
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <section class="signUp">
+        <div class="form">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-md-6 col-xl-4">
+                        <div class="data-view">
+                            <h5>الكلية</h5>
+                            <div class="field">
+                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="actions">
+                    <input type="submit" value="حفظ" class="btn btn-primary" />
+                    @Html.ActionLink("عودة", "Index", "", new { @class = "btn btn-danger" })
+
+                </div>
+            </div>
+        </div>
+    </section>
+}
+

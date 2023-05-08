@@ -1,0 +1,55 @@
+﻿@model IEnumerable<UnivercityCityFood.Models.Day>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+
+<div class="container">
+
+    <div class="col-12">
+        @Html.ActionLink("انشاء جديد", "Create", "", new { @class = "btn btn-danger" })
+
+
+        <div class="tableList">
+            <table class="table table-striped table-borderd text-center">
+                <thead>
+                    <tr>
+
+                        <th>
+                            اليوم
+                        </th>
+                        <th>
+                            تفاصيل اليوم
+                        </th>
+                        <th>
+                            العمليات
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DayName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DayDescription)
+                            </td>
+                            <td>
+                                @Html.ActionLink("تعديل", "Edit", new { id = item.DayID }, new { @class = "btn btn-danger" })
+                                @Html.ActionLink("تفاصيل", "Details", new { id = item.DayID }, new { @class = "btn btn-success" })
+                                @Html.ActionLink("جذف", "Delete", new { id = item.DayID }, new { @class = "btn btn-primary" })
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</div>

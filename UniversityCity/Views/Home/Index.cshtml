@@ -1,0 +1,32 @@
+﻿@model IEnumerable<UnivercityCityFood.Models.Day>
+
+
+<section class="meals">
+    <div class="container">
+        <h3>الوجبات</h3>
+
+        <div class="mealSlides" id="mealSlides">
+           @foreach (var item in Model )
+           {
+               string photoNumber = @item.DayID +".jpg";
+                <div class="meal-block">
+                    <div class="mealImg" style="background-image: url('../../Content/imgs/intro/@photoNumber')"></div>
+                    <h2>@Html.DisplayFor(modelItem => item.DayName)</h2>
+                   
+                    <p>
+                        <h5>
+                          "@Html.DisplayFor(modelItem => item.DayDescription)"
+                            
+                        </h5>
+
+                    </p>
+                    <div class="actions">
+                      @Html.ActionLink(" توجة لحجز الوجبة ", "Details", new { dayID = item.DayID  }, new { @class = "btn btn-danger"  })
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</section>
+

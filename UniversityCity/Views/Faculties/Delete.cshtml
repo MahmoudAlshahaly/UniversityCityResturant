@@ -1,0 +1,37 @@
+﻿@model UnivercityCityFood.Models.Faculty
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<section class="signUp">
+    <div class="form">
+        <div class="container">
+            <h5>هل انتا متاكد من حذف هذا الكلية؟</h5>
+
+            <div class="row">
+
+                <div class="col-md-6 col-xl-4">
+                    <div class="data-view">
+                        <h5>اليوم</h5>
+                        <div class="field">
+                            @Html.DisplayFor(model => model.Name)
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="actions">
+                    <input type="submit" value="حذف" class="btn btn-primary" />
+                    @Html.ActionLink("العوده", "Index", "", new { @class = "btn btn-danger" })
+                </div>
+            }
+
+        </div>
+    </div>
+</section>

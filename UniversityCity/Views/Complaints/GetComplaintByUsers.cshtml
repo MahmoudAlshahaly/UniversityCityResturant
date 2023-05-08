@@ -1,0 +1,44 @@
+﻿@model IEnumerable<UnivercityCityFood.Models.Complaint>
+
+@{
+    ViewBag.Title = "GetComplaintByUsers";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="col-12">
+    <div class="tableList">
+        <table class="table table-striped table-borderd text-center">
+            <thead>
+                <tr>
+
+                    <th>
+                        محتوى الشكوى
+                    </th>
+                    <th>
+                        تاريخ الشكوى
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CompContent)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CompDate)
+                        </td>
+                        <td>
+                            @Html.ActionLink("تفاصيل", "DetailsOfComplaint", new { id = item.Id }, new { @class = "btn btn-danger" }) |
+                            @Html.ActionLink("حذف", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>

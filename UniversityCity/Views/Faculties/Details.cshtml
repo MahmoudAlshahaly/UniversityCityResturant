@@ -1,0 +1,30 @@
+﻿@model UnivercityCityFood.Models.Faculty
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+
+<section class="signUp">
+    <div class="form">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-6 col-xl-4">
+                    <div class="data-view">
+                        <h5>الكلية</h5>
+                        <div class="field">
+                            @Html.DisplayFor(model => model.Name)
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+            <div class="actions">
+                @Html.ActionLink("تعديل", "Edit", new { id = Model.ID }, new { @class = "btn btn-danger" }) |
+                @Html.ActionLink("عودة", "Index", "", new { @class = "btn btn-danger" })
+            </div>
+        </div>
+    </div>
+</section>

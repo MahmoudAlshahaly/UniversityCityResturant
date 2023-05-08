@@ -1,0 +1,447 @@
+﻿@*@model  UniversityCity.Models.ApplicationUser*@
+@model Tuple<List<UnivercityCityFood.Models.BookingFood>, List<UnivercityCityFood.Models.PayFine>, List<UnivercityCityFood.Models.Complaint>>
+
+@using Microsoft.AspNet.Identity
+@using UniversityCity.Models
+
+@using UnivercityCityFood.Models;
+
+@{
+    ViewBag.Title = "DisplayProfile";
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel="shourtcut icon" href="../Content/imgs/logo.png" type="image/x-icon" />
+    <!--IE Comatibility Meta-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--First Mobile Meta-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>الصفحة الشخصية</title>
+
+    <link rel="stylesheet" href="~/Content/assests/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/assests/slick/slick.css" />
+
+    <link rel="stylesheet" href="~/Content/assests/slick/slick-theme.css" />
+
+    <link rel="stylesheet" href="~/Content/assests/fontawesome/css/fontawesome-all.min.css" />
+    <link rel="stylesheet" href="~/Content/assests/dateTimePicker/css/dateTimePicker.min.css" />
+    <link rel="stylesheet" href="~/Content/css/style.css" />
+    <link rel="stylesheet" href="~/Content/css/media.css" />
+</head>
+<body>
+    @using (Html.BeginForm("DisplayProfile", "Account", FormMethod.Post))
+    {
+        ApplicationDbContext db = new ApplicationDbContext();
+        var userid = User.Identity.GetUserId();
+        var CurrentUser = db.Users.Where(a => a.Id == userid).SingleOrDefault();
+
+
+        <div class="wrapper">
+            <div class="navBar">
+                <div class="container">
+                    <nav class="navbar navbar-expand-lg">
+                        <a class="navbar-brand" href="#"><img src="../Content/imgs/logo.png" /></a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </button>
+
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav">
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="~/Home/Index">الرئيسية<span class="sr-only">(current)</span></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="~/Account/DisplayProfile">الصفحة الشخصية</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="~/Home/Quetion">اساله شائعة</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="~/Complaints/Create">الشكاوى</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="~/Home/About">عن الموقع</a>
+                                </li>
+                                @Html.Partial("_Login")
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+
+
+            <section class="profile">
+                <div class="container">
+                    <div class="userCard">
+                        <div class="profilePic" style="background-image: url('../../Uploads/@CurrentUser.UserImage') "></div>
+                        <p class="userName">
+                            @CurrentUser.UserName
+                        </p>
+
+                        <a class="editProfile" href="~/Account/EditProfile">
+                            <span class="icon fal fa-edit"></span>
+                            تعديل البيانات الشخصية
+
+                        </a>
+                    </div>
+
+                    <div class="tabsGroup">
+
+                        <ul class="controller">
+                            <li class="active" tab-target="tab-1">
+                                البيانات الأساسية
+                            </li>
+                            @if (CurrentUser.UserType == "طالب")
+                            {
+
+                                <li tab-target="tab-2">
+                                    @*~/Account/DisplayProfile?name=BookingByUser*@
+                                    <a href="#">الحجوزات</a>
+
+                                </li>
+
+                                <li tab-target="tab-3">
+                                    @*~/Account/DisplayProfile?name=ComplaintByUser*@
+                                    <a href="#">الشكاوي</a>
+
+                                </li>
+                                <li tab-target="tab-4">
+                                    @*~/Account/DisplayProfile?name=FineByUser*@
+                                    <a href="#">الغرامات</a>
+
+                                </li>
+                            }
+                        </ul>
+
+                        <div class="contents">
+                            <div class="tabContent show" id='tab-1'>
+                                <div class="genInfo">
+                                    <div class="row">
+                                        @if (CurrentUser.UserType == "طالب")
+                                        {
+                                            <div class="col-md-6 col-xl-4">
+                                                <div class="data-view">
+                                                    <h5>الكلية</h5>
+                                                    <div class="field">
+                                                        @CurrentUser.UserFaculty
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                        <div class="col-md-6 col-xl-4">
+                                            <div class="data-view">
+                                                <h5>الرقم القومي</h5>
+                                                <div class="field">
+                                                    @CurrentUser.UserID
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 col-xl-4">
+                                            <div class="data-view">
+                                                <h5>البريد الإلكتروني</h5>
+                                                <div class="field">
+                                                    @CurrentUser.Email
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-xl-4">
+                                            <div class="data-view">
+                                                <h5>المستخدم</h5>
+                                                <div class="field">
+                                                    @CurrentUser.UserType
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-xl-4">
+                                            <div class="data-view">
+                                                <h5>تاريخ الميلاد</h5>
+                                                <div class="field">
+                                                    @CurrentUser.UserBirthDay
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            @if (CurrentUser.UserType == "طالب")
+                            {
+                                <div class="tabContent" id='tab-2'>
+                                    <div class="stBooks">
+                                        <div class="container">
+                                            <div class="col-12">
+                                                @if (@ViewBag.Details != null)
+                                                {
+                                                    <section class="signUp">
+                                                        <div class="form">
+                                                            <div class="container">
+                                                                <div class="row">
+                                                                    <div class="col-md-6 col-xl-4">
+                                                                        <div class="data-view">
+                                                                            <h5>اليوم</h5>
+                                                                            <div class="field">
+                                                                                @ViewBag.Details.day.DayName
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-md-6 col-xl-4">
+                                                                        <div class="data-view">
+                                                                            <h5>الاستلام</h5>
+                                                                            <div class="field">
+                                                                                <div class="checkbox">
+                                                                                    @ViewBag.Details.Received
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6 col-xl-4">
+                                                                        <div class="data-view">
+                                                                            <h5>الحجز</h5>
+                                                                            <div class="field">
+                                                                                <div class="checkbox">
+                                                                                    @ViewBag.Details.Booked
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6 col-xl-4">
+                                                                        <div class="data-view">
+                                                                            <h5>تاريخ الحجز</h5>
+                                                                            <div class="field">
+                                                                                @ViewBag.Details.BookingDateToDay
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    @*style="display:none;"*@
+                                                                    <div class="col-md-6 col-xl-4">
+                                                                        <div class="data-view">
+                                                                            <h5>وقت الحجز</h5>
+                                                                            <div class="field">
+                                                                                @ViewBag.Details.BookingTimeToDay
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="actions">
+                                                                    @Html.ActionLink("العودة", "DisplayProfile", "", new { @class = "btn btn-success" })
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </section>
+                                                }
+
+                                                <div class="tableList">
+                                                    <table class="table table-striped table-borderd text-center">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>
+                                                                    اليوم
+                                                                </th>
+                                                                <th>
+                                                                    الاستلام
+                                                                </th>
+                                                                <th>
+                                                                    الحجز
+                                                                </th>
+                                                                <th>
+                                                                    تاريخ الحجز
+                                                                </th>
+                                                                <th>
+                                                                    وقت الحجز
+                                                                </th>
+                                                                <th></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @*(List<BookingFood>)ViewBag.BookingByUser*@
+                                                            @foreach (var item in Model.Item1)
+                                                                {
+                                                                <tr>
+
+                                                                    <td>
+                                                                        @Html.DisplayFor(modelItem => item.day.DayName)
+                                                                    </td>
+                                                                    <td>
+                                                                        @Html.DisplayFor(modelItem => item.Received)
+                                                                    </td>
+                                                                    <td>
+                                                                        @Html.DisplayFor(modelItem => item.Booked)
+                                                                    </td>
+                                                                    <td>
+                                                                        @Html.DisplayFor(modelItem => item.BookingDateToDay)
+                                                                    </td>
+                                                                    <td>
+                                                                        @Html.DisplayFor(modelItem => item.BookingTimeToDay)
+                                                                    </td>
+                                                                    <td>
+                                                                        @Html.ActionLink("تفاصيل", "DisplayProfile", new { id = item.id}, new { @class = "btn btn-danger" })
+
+                                                                        @{
+                                                                                DateTime thisDay = DateTime.Today;
+                                                                                var thisDayAfter = thisDay.ToString("d");
+
+                                                                                TimeRange timeRange = new TimeRange();
+                                                                                timeRange = TimeRange.Parse("19:00-23:00");
+                                                                                bool IsNowInTheRange = timeRange.IsIn(DateTime.Now.TimeOfDay);
+                                                                                if ((IsNowInTheRange && item.BookingDateToDay == thisDayAfter))
+                                                                                {
+                                                                            @Html.ActionLink("حذف", "Delete", new { id = item.id }, new { @class = "btn btn-primary" })
+                                                                                }
+                                                                        }
+
+                                                                    </td>
+                                                                </tr>
+                                                                                }
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                                <div class="tabContent" id='tab-3'>
+                                    <div class="stComplaints">
+                                        <div class="col-12">
+                                            <div class="tableList">
+                                                <table class="table table-striped table-borderd text-center">
+                                                    <thead>
+                                                        <tr>
+
+                                                            <th>
+                                                                محتوى الشكوى
+                                                            </th>
+                                                            <th>
+                                                                تاريخ الشكوى
+                                                            </th>
+                                                            <th></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @*(List<Complaint>)ViewBag.ComplaintByUser*@
+                                                        @foreach (var item in Model.Item3)
+                                                            {
+                                                            <tr>
+
+                                                                <td>
+                                                                    @Html.DisplayFor(modelItem => item.CompContent)
+                                                                </td>
+                                                                <td>
+                                                                    @Html.DisplayFor(modelItem => item.CompDate)
+                                                                </td>
+                                                                <td>
+                                                                    @Html.ActionLink("تفاصيل", "DetailsOfComplaint", new { id = item.Id }, new { @class = "btn btn-danger" }) |
+                                                                    @Html.ActionLink("حذف", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
+                                                                </td>
+                                                            </tr>
+                                                            }
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="tabContent" id='tab-4'>
+                                    <div class="stActivities">
+                                        <div class="container">
+                                            <div class="col-12">
+                                                
+                                                <div class="tableList">
+                                                    <table class="table table-striped table-borderd text-center">
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col"> اليوم</th>
+                                                                <th scope="col"> الرقم القومى</th>
+                                                                <th scope="col"> الاسم</th>
+                                                                <th scope="col">موعد الغرامة</th>
+                                                                <th scope="col"> دفع الغرامة</th>
+
+                                                            </tr>
+                                                        </thead>
+
+                                                        <tbody>
+                                                            @*(List<PayFine>)ViewBag.FineByUser*@
+                                                            @foreach (var item in  Model.Item2)
+                                                                {
+                                                                <tr>
+                                                                    <td>
+                                                                        @Html.DisplayFor(modelItem => item.Day.DayName)
+                                                                    </td>
+                                                                    <td>
+                                                                        @Html.DisplayFor(modelItem => item.UserID)
+                                                                    </td>
+                                                                    <td>
+                                                                        @Html.DisplayFor(modelItem => item.UserName)
+                                                                    </td>
+                                                                    <td>
+                                                                        @Html.DisplayFor(modelItem => item.PayFineDate)
+                                                                    </td>
+                                                                    <td>
+                                                                        @Html.DisplayFor(modelItem => item.PayFineDone)
+                                                                    </td>
+
+                                                                </tr>
+                                                                }
+                                                        </tbody>
+
+                                                    </table>
+
+                                                    @*<div class="stCount">
+                                                            عدد الطلاب:
+
+                                                            <span>22</span>
+                                                        </div>
+
+                                                        <div class="stCount">
+                                                            المبلغ:
+
+                                                            <span>300 جنية</span>
+                                                        </div>*@
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                                                            }
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <footer>
+                <div class="container">
+                    <div class="copyrights">
+                        @*كل الحقوق محفوظه © المدينة الجامعية 2019*@
+                        <p style="color:white;">كل الحقوق محفوظه © MenoFia Innovators TeaM 2019</p>
+                    </div>
+                </div>
+            </footer>
+        </div>
+                                                                            }
+    <script src="~/Content/assests/jquery/jquery.min.js"></script>
+    <script src="~/Content/assests/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/Content/assests/slick/slick.min.js"></script>
+    <script src="~/Content/assests/countDown/js/countDown.js"></script>
+    <script src="~/Content/assests/dateTimePicker/js/moment.min.js"></script>
+    <script src="~/Content/assests/dateTimePicker/js/dateTimePicker.min.js"></script>
+    <script src="~/scripts/main.js"></script>
+</body>
+</html>

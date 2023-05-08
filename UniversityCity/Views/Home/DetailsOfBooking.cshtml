@@ -1,0 +1,126 @@
+﻿@model UnivercityCityFood.Models.BookingFood
+
+@{
+    ViewBag.Title = "DetailsOfBooking";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+
+
+
+<section class="signUp">
+    <div class="form">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-xl-4">
+                    <div class="data-view">
+                        <h5>اليوم</h5>
+                        <div class="field">
+                            @Html.DisplayFor(model => model.day.DayName)
+                        </div>
+                    </div>
+                </div>
+               
+                <div class="col-md-6 col-xl-4">
+                    <div class="data-view">
+                        <h5>الاستلام</h5>
+                        <div class="field">
+                            <div class="checkbox">
+                               @Html.DisplayFor(model => model.Received)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-4">
+                    <div class="data-view">
+                        <h5>الحجز</h5>
+                        <div class="field">
+                            <div class="checkbox">
+                                @Html.DisplayFor(model => model.Booked)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-4">
+                    <div class="data-view">
+                        <h5>تاريخ الحجز</h5>
+                        <div class="field">
+                            @Html.DisplayFor(model => model.BookingDateToDay)
+                        </div>
+                    </div>
+                </div>
+                @*style="display:none;"*@
+                <div class="col-md-6 col-xl-4">
+                    <div class="data-view">
+                        <h5>وقت الحجز</h5>
+                        <div class="field">
+                            @Html.DisplayFor(model => model.BookingTimeToDay)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="actions">
+                @Html.ActionLink("العودة", "GetBookingByUsers","",new { @class = "btn btn-success" })
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="signUp">
+    <div class="form">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-xl-4">
+                    <div class="data-view">
+                        <h5>اليوم</h5>
+                        <div class="field">
+                            @Model.Item4.day.DayName
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-xl-4">
+                    <div class="data-view">
+                        <h5>الاستلام</h5>
+                        <div class="field">
+                            <div class="checkbox">
+                                @Model.Item4.Received
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-4">
+                    <div class="data-view">
+                        <h5>الحجز</h5>
+                        <div class="field">
+                            <div class="checkbox">
+                                @Model.Item4.Booked
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-4" ">
+                    <div class="data-view">
+                        <h5>تاريخ الحجز</h5>
+                        <div class="field">
+                            @Model.Item4.BookingDateToDay
+                        </div>
+                    </div>
+                </div>
+                @*style="display:none;"*@
+                <div class="col-md-6 col-xl-4">
+                    <div class="data-view">
+                        <h5>وقت الحجز</h5>
+                        <div class="field">
+                            @Model.Item4.BookingTimeToDay
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="actions">
+                @Html.ActionLink("العودة", "GetBookingByUsers", "", new { @class = "btn btn-success" })
+            </div>
+        </div>
+    </div>
+</section>

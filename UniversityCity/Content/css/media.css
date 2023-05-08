@@ -1,0 +1,137 @@
+@media (max-width: 375px) {
+  .askPopup .modal-dialog,
+  .modal-dialog {
+    min-width: 320px;
+    max-width: 320px;
+  }
+
+  /* Navbar */
+  .wrapper .navBar .navbar-nav {
+    text-align: center;
+  }
+
+  .wrapper .navBar .navbar-nav li {
+    display: block;
+  }
+
+  .wrapper .navBar .logOut {
+    float: none;
+    padding: .5rem 1rem
+  }
+
+  .wrapper .navBar .logOut a {
+    margin-right: 0
+  }
+
+  .wrapper .navBar .dropdown-menu {
+    text-align: center;
+  }
+
+  .faq h3 {
+    font-size: 30px;
+  }
+
+  .faq .question h5 {
+    font-size: 18px;
+  }
+
+}
+
+@media (min-width: 376px) and (max-width: 575px) {
+  .askPopup .modal-dialog,
+  .modal-dialog {
+    min-width: 370px;
+    max-width: 370px;
+  }
+
+  /* Navbar */
+  .wrapper .navBar .navbar-nav {
+    text-align: center;
+  }
+
+  .wrapper .navBar .navbar-nav li {
+    display: block;
+  }
+
+  .wrapper .navBar .loginLink,
+  .wrapper .navBar .logOut {
+    float: none;
+    padding: .5rem 1rem
+  }
+
+  .wrapper .navBar .logOut a {
+    margin-right: 0
+  }
+
+  .wrapper .navBar .dropdown-menu {
+    text-align: center;
+  }
+
+  .faq h3 {
+    font-size: 35px;
+  }
+
+  .faq .question h5 {
+    font-size: 18px;
+  }
+
+ }
+
+@media (min-width: 576px) and (max-width: 767px) {
+  /* Navbar */
+  .wrapper .navBar .navbar-nav {
+    text-align: center;
+  }
+
+  .wrapper .navBar .navbar-nav li {
+    display: block;
+  }
+
+  .wrapper .navBar .logOut {
+    float: none;
+    padding: .5rem 1rem
+  }
+
+  .wrapper .navBar .logOut a {
+    margin-right: 0
+  }
+
+  .wrapper .navBar .dropdown-menu {
+    text-align: center;
+  }
+
+  .faq .question h5 {
+    font-size: 20px;
+  }
+
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .signup .modal-dialog {
+    min-width: 90%
+  }
+
+  /* Navbar */
+  .wrapper .navBar .navbar-nav {
+    text-align: center;
+  }
+
+  .wrapper .navBar .navbar-nav li {
+    display: block;
+  }
+
+  .wrapper .navBar .logOut {
+    float: none;
+    padding: .5rem 1rem
+  }
+
+  .wrapper .navBar .logOut a {
+    margin-right: 0
+  }
+
+  .wrapper .navBar .dropdown-menu {
+    text-align: center;
+  }
+
+
+}

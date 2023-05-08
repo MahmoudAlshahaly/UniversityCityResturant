@@ -1,0 +1,75 @@
+﻿@model UnivercityCityFood.Models.BookingFood
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+
+<section class="signUp">
+    <div class="form">
+
+        <div class="container">
+            <h5>هل انت متأكد من الحذف ؟</h5>
+
+            <div class="row">
+                <div class="col-md-6 col-xl-4">
+                    <div class="data-view">
+                        <h5>اليوم</h5>
+                        <div class="field">
+                            @Html.DisplayFor(model => model.day.DayName)
+                        </div>
+                    </div>
+                </div>
+               
+                <div class="col-md-6 col-xl-4">
+                    <div class="data-view">
+                        <h5>الاستلام</h5>
+                        <div class="field">
+                            <div class="checkbox">
+                               @Html.DisplayFor(model => model.Received)
+                               @Html.ValidationMessageFor(model => model.Received, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-4">
+                    <div class="data-view">
+                        <h5>الحجز</h5>
+                        <div class="field">
+                            <div class="checkbox">
+                                @Html.DisplayFor(model => model.Booked)
+                                @Html.ValidationMessageFor(model => model.Booked, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-4" style="display:none;">
+                    <div class="data-view">
+                        <h5>تاريخ الحجز</h5>
+                        <div class="field">
+                            @Html.DisplayFor(model => model.BookingDateToDay)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-4" style="display:none;">
+                    <div class="data-view">
+                        <h5>وقت الحجز</h5>
+                        <div class="field">
+                            @Html.DisplayFor(model => model.BookingTimeToDay)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="actions">
+                    <input type="submit" value="حذف" class="btn btn-danger" /> 
+                    @Html.ActionLink("العودة", "GetBookingByUsers","", new { @class = "btn btn-success" })
+                </div>
+            }
+        </div>
+    </div>
+</section>

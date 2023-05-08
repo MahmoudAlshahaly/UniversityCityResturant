@@ -1,0 +1,224 @@
+﻿@model UniversityCity.Models.RegisterViewModel
+@{
+    ViewBag.Title = "انشاء حساب جديد";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+@if (!User.Identity.IsAuthenticated)
+{
+if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
+{
+    if (ViewBag.Message != null)
+    {
+
+        <div class="alert alert-success">
+            <h4 class="H" style="text-align:center;">@ViewBag.Message</h4> 
+        </div>
+    }
+}
+else if ((string)Session["UserGroup"] == "طالب")
+{
+
+    if (ViewBag.Message != null)
+    {
+
+        <div class="alert alert-danger">
+            <strong>@ViewBag.Message</strong>
+        </div>
+    }
+    using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+    {
+                @Html.AntiForgeryToken()
+                
+
+        <div class="wrapper">
+
+            <section class="signIn">
+                <div class="form">
+                    <div class="container">
+                        @Html.ValidationSummary("", new { @class = "text-danger" })
+                        @if (ViewBag.Message != null)
+                        {
+
+                            <div class="shadow-lg p-3 mb-5 bg-white rounded">
+                                <h5 style="text-align:center; color:#1c5e84;">@ViewBag.Message</h5>
+                            </div>
+                        @*<div class="alert alert-danger">
+                            <strong>@ViewBag.Message</strong>
+                        </div>*@
+                        }
+                        <div class="form-group">
+                            <h5 style="text-align:center;">تسجيل اشتراك</h5>
+
+                        </div>
+                        <div class="form-group">
+                            <div class="field">
+                                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = "اسم المستخدم" })
+                                @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="field">
+                                @Html.TextBoxFor(m => m.UserID, new { @class = "form-control", @placeholder = "الرقم القومى" })
+                                @Html.ValidationMessage("SDNExist", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="field">
+                                @Html.DropDownList("UserFaculty", null, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="field">
+                                @Html.EditorFor(m => m.UserBirthDay, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="field">
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "البريد الالكترونى" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="field">
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "كلمة المرور" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="field">
+                                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "تأكيد كلمة المرور" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="field" >
+                                <label class="btn btn-default btn-sm center-block btn-file">
+                                    اختار صورة
+                                    <i class="fa fa-upload fa-2x" aria-hidden="true"></i>
+                                    <input type="file" name="UploadUserImage" id="ProfileImage" style="display: none;" />
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="submit">
+                            <input  type="submit" class="btn btn-danger enter" value="تسجيل" id="save" />
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+    }
+
+
+}
+
+
+
+else if ((string)Session["UserGroup"] == "مشرف بونات" || (string)Session["UserGroup"] == "مدير مطعم" || (string)Session["UserGroup"] == "مشرف مطعم" || (string)Session["UserGroup"] == "مدير عام")
+{
+
+
+    using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="wrapper">
+
+            <section class="signIn">
+                <div class="form">
+                    <div class="container">
+                        @Html.ValidationSummary("", new { @class = "text-danger" })
+                        @if (ViewBag.Message != null)
+                        {
+
+                            <div class="shadow-lg p-3 mb-5 bg-white rounded">
+                                <h5 style="text-align:center; color:#1c5e84;">@ViewBag.Message</h5>
+                            </div>
+                        @*<div class="alert alert-danger">
+                            <strong>@ViewBag.Message</strong>
+                        </div>*@
+                        }
+                        <div class="form-group">
+                            <h5 style="text-align:center;">تسجيل اشتراك</h5>
+
+                        </div>
+                        <div class="form-group">
+                            <div class="field">
+                                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = "اسم المستخدم" })
+                                @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="field">
+                                @Html.TextBoxFor(m => m.UserID, new { @class = "form-control", @placeholder = "الرقم القومى" })
+                                @Html.ValidationMessage("SDNExist", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="field">
+                                @Html.EditorFor(m => m.UserBirthDay, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="field">
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "البريد الالكترونى" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="field">
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "كلمة المرور" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="field">
+                                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "تأكيد كلمة المرور" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="field">
+                                <label class="btn btn-default btn-sm center-block btn-file">
+                                    اختار صورة
+                                    <i class="fa fa-upload fa-2x" aria-hidden="true"></i>
+                                    <input type="file" name="UploadUserImage" id="ProfileImage" style="display: none;" />
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="submit">
+                            <input type="submit" class="btn btn-danger enter" value="تسجيل" id="save" />
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        }
+
+
+    }
+
+
+}
+
+@*@section Scripts{
+<script>
+    $(function () {
+        $("#save").click(function () {
+            if($("#ProfileImage").val=="")
+            {
+                $("#DivError").fadeIn();
+                $("#ViewError").append("رجاء قم باختيار صورة شخصية");
+                return false;
+            }
+        });
+    });
+</script>
+}*@

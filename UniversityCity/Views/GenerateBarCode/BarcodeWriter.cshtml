@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "انشاء الباركود";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+
+
+@using (Html.BeginForm("BarcodeWriter", "GenerateBarCode", FormMethod.Post))
+{
+    <div class="container" style="margin-top:40px;">
+
+        <div class="row">
+            <div class="col-lg-3"></div>
+            <div class="col-lg-6">
+                <input type="text" name="barcode" class="form-control col-4" id="textcode"  placeholder="الرقم القومى"/><br />
+                <input type="submit" class="btn btn-primary" id="btnGenerate" value="انشاء" />
+                <hr />
+
+                @if (ViewBag.BarcodeImage != null)
+                {
+                    <img src="@ViewBag.BarcodeImage" />
+                }
+            </div>
+        </div>
+    </div>
+}

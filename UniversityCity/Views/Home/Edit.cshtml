@@ -1,0 +1,105 @@
+﻿@model UnivercityCityFood.Models.BookingFood
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+
+        @Html.HiddenFor(model => model.id)
+
+        @Html.HiddenFor(model => model.DayID)
+
+        @Html.HiddenFor(model => model.ApplicationUserID)
+
+        @*@Html.HiddenFor(model => model.Booked)*@
+
+        @Html.HiddenFor(model => model.BookingDateToDay)
+
+        @Html.HiddenFor(model => model.BookingTimeToDay)
+
+    <section class="signUp">
+        <div class="form">
+            <div class="container">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="row">
+
+                    <div class="col-md-6 col-xl-4">
+                        <div class="data-view">
+                            <h5>اليوم</h5>
+                            <div class="field">
+                                @Model.day.DayName
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xl-4">
+                        <div class="data-view">
+                            <h5>اسم الطالب</h5>
+                            <div class="field">
+                                @Model.appUser.UserName
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xl-4">
+                        <div class="data-view">
+                            <h5>الاستلام</h5>
+                            <div class="field">
+                                <div class="checkbox">
+                                    @Html.EditorFor(model => model.Received)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xl-4">
+                        <div class="data-view">
+                            <h5>الحجز</h5>
+                            <div class="field">
+                                <div class="checkbox">
+                                    @Html.EditorFor(model => model.Booked)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @*<div class="col-md-6 col-xl-4" ">
+                        <div class="data-view">
+                            <h5>تاريخ الحجز</h5>
+                            <div class="field">
+                                @Html.EditorFor(model => model.BookingDateToDay)
+                            </div>
+                        </div>
+                    </div>
+                    style="display:none;"
+                    <div class="col-md-6 col-xl-4">
+                        <div class="data-view">
+                            <h5>وقت الحجز</h5>
+                            <div class="field">
+                                @Html.EditorFor(model => model.BookingTimeToDay)
+                            </div>
+                        </div>
+                    </div>*@
+
+                </div>
+                <div class="actions">
+                    <input type="submit" value="حفظ التعديل" class="btn btn-success" />
+                    @Html.ActionLink("العودة", "GetAllBooking", "", new { @class = "btn btn-danger" })
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+}
+  
+
+
+
+
+
+
+

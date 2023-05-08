@@ -1,0 +1,82 @@
+﻿@import url("http://www.fontstatic.com/f=bahij");
+@font-face{
+    font-family:myfont;
+    src:url('font/GE_SS_Two_Bold.otf')
+}
+@font-face{
+    font-family:myfont2;
+    src:url('font/DroidNaskh-Regular.ttf')
+}
+body{
+   padding-top:100px;
+}
+.navbar-default {
+    background-color:#32c69a;
+    border-color: #e7e7e7;
+}
+.navbar-default .navbar-nav > li > a {
+    color: #fff;
+    font-family:myfont;
+}
+
+.nav > li {
+    position: relative;
+    display: block;
+    height: 70px;
+    padding-top: 10px;
+}
+.myfooter{
+    background-color:#32c670;
+    color:white;
+    font-family:myfont;
+    text-align:justify;
+}
+.myfooter h4,ul,p{
+    margin-bottom:10px;
+    font-family:myfont2;
+}
+.subfooter{
+    background-color:#32c69a;
+    color:white;
+    padding:10px;
+    text-align:center;
+}
+.myfooter a{
+    color:azure; 
+}
+.Logo-size{
+    width:130px;
+    height:60px;
+    margin-top:-9px;
+}
+label{
+    font-family:myfont2;
+}
+.btn{
+     font-family:myfont2;
+     border-radius:15px;
+     width:100px;
+     position:center;
+}
+TextArea{
+     font-family:myfont2;
+     border-radius:15px;
+     width:330px;
+     height:100px;
+     position:center;
+}
+.H{
+     font-family:myfont2;
+}
+.form-control{
+    border-radius:13px;
+}
+.col-md-6{
+    font-family: 'bahij';
+    text-size-adjust:inherit;
+}
+
+th,dl{
+ font-family:myfont2;
+      text-align:center;
+}
